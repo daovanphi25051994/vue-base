@@ -8,33 +8,27 @@
       <input type="password" v-model="loginForm.password" /><br />
       <button @click.prevent="login">Login</button>
     </form>
+    <button @click="logout" >Logout</button>
   </div>
 </template>
 
 <script>
-import axios from "axios";
 export default {
   name: "login",
   data() {
     return {
-       loginForm: {
-          email: "",
+      loginForm: {
+        email: "",
         password: ""
-       }
+      }
     };
   },
   methods: {
     login() {
-      console.log(this.loginForm);
-      axios
-        .post("https://vndreamers-dev.herokuapp.com/auth/login", this.loginForm)
-        .then(
-          data => {
-            console.log(data);
-          }
-        ),error => {
-          console.log(error)
-        }
+      this.$store.dispatch("LOGIN", this.loginForm);
+    },
+    logout() {
+      this.$store.dispatch("LOGOUT");
     }
   }
 };
