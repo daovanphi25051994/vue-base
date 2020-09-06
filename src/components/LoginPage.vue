@@ -3,8 +3,7 @@
     <el-row>
       <el-col :span="12">
         <div class="grid-content bg-purple">
-              <el-image :src="src"></el-image>
-
+          <el-image :src="src"></el-image>
         </div>
       </el-col>
       <el-col :span="12">
@@ -74,24 +73,21 @@ export default {
   },
   methods: {
    async login() {
-     await this.$store.dispatch("LOGIN", this.loginForm)
-     this.$router.push('/'+ this.getUser.username).catch(err => {
-       console.log(err)
+     await this.$store.dispatch("LOGIN", this.loginForm).then(()=>{
+       console.log('end')
+       this.$router.push(this.$store.getters.getUser.username)
      })
-      
     },
     logout() {
       this.$store.dispatch("LOGOUT");
     }
   },
   computed: {
-    getUser(){
-      return this.$store.getters.getUser
+    getUser() {
+      return this.$store.getters.getUser;
     }
   }
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import { login } from "../api/auth";
+
 import {
   setToken,
   removeToken,
@@ -30,39 +31,28 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
-    setToken(state, token) {
-      setToken(token);
+    setToken(state){
+      setToken()
     },
-    setRoles(state, roles) {
-      setRoles(roles);
-    },
-    removeToken(state, token) {
-      removeToken(token);
-    },
-    removeRoles(state, roles) {
-      removeRoles(roles);
-    },
-    setUser(state, user) {
-      state.userProfile = user;
+    setUserProfile(state, user){
+      state.userProfile = user
     }
+    
   },
   actions: {
     LOGIN: ({ commit }, loginForm) => {
-      console.log("first");
-      login(loginForm).then(
-        response => {
-          console.log("second");
-          console.log(loginForm);
-          console.log(response);
-          commit("setToken", response.data.access_token);
-          commit("setRoles", response.data.roles);
-          commit("setUser", response.data.user);
-        },
-        error => {
-          console.log("three");
-          console.log(error);
-        }
-      );
+     return new Promise((resolve, reject) => {
+      login( loginForm).then(response => {
+          console.log(response.data.user)
+          commit("setToken")
+          commit("setUserProfile", response.data.user)
+
+          resolve()
+      }).catch(error => {
+          reject(error)
+      })
+  })
+     
     },
     LOGOUT: ({ commit }) => {
       commit("removeToken");

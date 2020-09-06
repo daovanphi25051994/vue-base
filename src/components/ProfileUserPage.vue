@@ -20,12 +20,7 @@ export default {
   name: "profile-user",
   data() {
     return {
-        // userInfo:{
-        //     id: null,
-        //     username: '',
-        //     first_name: '',
-        //     last_name: ''
-        // }
+
         userInfo: this.$store.getters.getUser
        
     }
