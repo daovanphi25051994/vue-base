@@ -72,9 +72,8 @@ export default {
     };
   },
   methods: {
-   async login() {
-     await this.$store.dispatch("LOGIN", this.loginForm).then(()=>{
-       console.log('end')
+    login() {
+      this.$store.dispatch("LOGIN", this.loginForm).then(()=>{
        this.$router.push(this.$store.getters.getUser.username)
      })
     },

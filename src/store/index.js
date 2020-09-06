@@ -4,8 +4,8 @@ import { login } from "../api/auth";
 
 import {
   setToken,
-  removeToken,
   setRoles,
+  removeToken,
   removeRoles
 } from "../request/cookie";
 
@@ -31,28 +31,36 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
-    setToken(state){
-      setToken()
+    setToken(state, token) {
+      setToken(token);
     },
-    setUserProfile(state, user){
-      state.userProfile = user
+    setRoles(state, roles) {
+      setRoles(roles);
+    },
+    setUserProfile(state, user) {
+      state.userProfile = user;
+    },
+    removeToken() {
+      removeToken();
+    },
+    removeRoles() {
+      removeRoles();
     }
-    
   },
   actions: {
     LOGIN: ({ commit }, loginForm) => {
-     return new Promise((resolve, reject) => {
-      login( loginForm).then(response => {
-          console.log(response.data.user)
-          commit("setToken")
-          commit("setUserProfile", response.data.user)
-
-          resolve()
-      }).catch(error => {
-          reject(error)
-      })
-  })
-     
+      return new Promise((resolve, reject) => {
+        login(loginForm)
+          .then(response => {
+            commit("setToken", response.data.access_token);
+            commit("setRoles", response.data.roles[0].role_name);
+            commit("setUserProfile", response.data.user);
+            resolve();
+          })
+          .catch(error => {
+            reject(error);
+          });
+      });
     },
     LOGOUT: ({ commit }) => {
       commit("removeToken");
