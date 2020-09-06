@@ -1,8 +1,16 @@
 <template>
   <div id="profile-user">
     <el-row>
-      <el-col :span="12"> User Profile</el-col>
-      <el-col :span="12"> </el-col>
+      <el-col :span="12">
+        <h1>User Profile</h1>
+        <p>Id: {{userInfo.id}}</p>
+        <p>First Name:{{userInfo.first_name}}</p>
+        <p>Last Name:{{userInfo.last_name}}</p>
+        <!-- <p>Email:{{userInfo}}</p>
+        <p>Phone:{{userInfo}}</p>
+        <p>username:{{userInfo}}</p> -->
+      </el-col>
+      <el-col :span="12">Bài viết </el-col>
     </el-row>
   </div>
 </template>
@@ -12,23 +20,25 @@ export default {
   name: "profile-user",
   data() {
     return {
-      profileUser: {
-        email: "",
-        password: ""
-      }
-      
-    };
+        // userInfo:{
+        //     id: null,
+        //     username: '',
+        //     first_name: '',
+        //     last_name: ''
+        // }
+        userInfo: this.$store.getters.getUser
+       
+    }
   },
-  methods: {
-   
-  },
+  methods: {},
   computed: {
     
   }
+//   ,
+//   mounted() {
+//     this.userInfo = this.$store.getters.getUser
+//   }
 };
 </script>
 
-<style scoped>
-
-
-</style>
+<style scoped></style>

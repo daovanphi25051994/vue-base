@@ -2,8 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import LoginPage from "@/components/LoginPage";
 import AdminPage from "@/components/AdminPage";
-import UserProfile from "../components/ProfileUserPage.vue"
-
+import UserProfile from "../components/ProfileUserPage";
 
 Vue.use(Router);
 

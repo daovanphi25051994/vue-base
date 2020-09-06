@@ -75,7 +75,9 @@ export default {
   methods: {
    async login() {
      await this.$store.dispatch("LOGIN", this.loginForm)
-      await  this.$router.push('/'+ this.getUser.username)
+     this.$router.push('/'+ this.getUser.username).catch(err => {
+       console.log(err)
+     })
       
     },
     logout() {
@@ -91,7 +93,5 @@ export default {
 </script>
 
 <style scoped>
-#login-form {
-  /* width: 300px; */
-}
+
 </style>

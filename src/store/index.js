@@ -15,7 +15,13 @@ const store = new Vuex.Store({
     userProfile: {
       id: null,
       address: "",
-      username: ""
+      username: "",
+      first_name: "",
+      last_name: "",
+      email: "",
+      birth_date: "",
+      phone: "",
+      about_me: ""
     }
   },
   getters: {
