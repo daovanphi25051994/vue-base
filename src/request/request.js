@@ -22,4 +22,4 @@ httpRequest.interceptors.request.use(
   }
 );
 
-export default httpRequest;
+export default httpRequest
