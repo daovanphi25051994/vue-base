@@ -1,8 +1,8 @@
 import httpRequest from "../request/request";
 
-export function getInfoUser() {
+export function getInfoUser(id) {
   return httpRequest({
-    url: "users/:id/posts",
+    url: `api/users/${id}/posts`,
     method: "get"
   });
 }

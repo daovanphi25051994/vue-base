@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import { login } from "../api/auth";
+import {getInfoUser} from "../api/user"
 
 import {
   setToken,
@@ -23,7 +24,8 @@ const store = new Vuex.Store({
       birth_date: "",
       phone: "",
       about_me: ""
-    }
+    },
+    posts: []
   },
   getters: {
     getUser(state) {
@@ -63,8 +65,17 @@ const store = new Vuex.Store({
       });
     },
     LOGOUT: ({ commit }) => {
-      commit("removeToken");
-      commit("removeRoles");
+      commit("removeToken")
+      commit("removeRoles")
+    },
+    GET_POSTS: ({commit}, id) => {
+      con
+      getInfoUser(id).then(response => {
+        console.log(response)
+        this.state.posts = response
+      }, error => {
+        console.log('error')
+      })
     }
   }
 });

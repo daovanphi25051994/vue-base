@@ -73,9 +73,9 @@ export default {
   },
   methods: {
     login() {
-      this.$store.dispatch("LOGIN", this.loginForm).then(()=>{
-       this.$router.push(this.$store.getters.getUser.username)
-     })
+      this.$store.dispatch("LOGIN", this.loginForm).then(() => {
+        this.$router.push(this.$store.getters.getUser.username);
+      });
     },
     logout() {
       this.$store.dispatch("LOGOUT");
