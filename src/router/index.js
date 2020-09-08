@@ -5,7 +5,7 @@ import AdminPage from '@/components/AdminPage'
 import UserProfile from '../components/ProfileUserPage'
 
 Vue.use(Router)
-
+import { getRoles }from '../request/cookie'
 export default new Router({
   mode: 'history',
   routes: [
@@ -17,12 +17,22 @@ export default new Router({
     {
       path: '/:username',
       name: 'user-profile',
-      component: UserProfile
+      component: UserProfile, beforeEnter: (to, from, next) => {
+        const role = getRoles()
+        if(role == 'USER'){
+            next();
+        }
+    }
     },
     {
       path: '/admin/:username',
       name: 'adminPage',
-      component: AdminPage
+      component: AdminPage, beforeEnter: (to, from, next) => {
+        const role = getRoles()
+        if(role == 'ADMIN'){
+            next();
+        }
+    }
     }
   ]
 })

@@ -76,7 +76,6 @@ export default {
       this.$store.dispatch('LOGIN', this.loginForm).then((data) => {
      let username = data[0]
      let role = data[1]
-
         if(role == 'USER'){
         this.$router.push(username)
         }else {
