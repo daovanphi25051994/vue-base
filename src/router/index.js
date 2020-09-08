@@ -1,28 +1,28 @@
-import Vue from "vue";
-import Router from "vue-router";
-import LoginPage from "@/components/LoginPage";
-import AdminPage from "@/components/AdminPage";
-import UserProfile from "../components/ProfileUserPage";
+import Vue from 'vue'
+import Router from 'vue-router'
+import LoginPage from '@/components/LoginPage'
+import AdminPage from '@/components/AdminPage'
+import UserProfile from '../components/ProfileUserPage'
 
-Vue.use(Router);
+Vue.use(Router)
 
 export default new Router({
   mode: 'history',
   routes: [
     {
-      path: "/",
-      name: "loginPage",
+      path: '/',
+      name: 'loginPage',
       component: LoginPage
     },
     {
-      path: "/:username",
-      name: "user-profile",
+      path: '/:username',
+      name: 'user-profile',
       component: UserProfile
     },
     {
-      path: "/admin/:username",
-      name: "adminPage",
+      path: '/admin/:username',
+      name: 'adminPage',
       component: AdminPage
     }
   ]
-});
+})

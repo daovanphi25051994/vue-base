@@ -36,34 +36,34 @@ const store = new Vuex.Store({
     posts: []
   },
   getters: {
-    getUser(state) {
+    getUser (state) {
       return state.userProfile
     },
-    getPosts(state) {
+    getPosts (state) {
       return state.posts
     }
   },
   mutations: {
-    setToken(state, token) {
+    setToken (state, token) {
       setToken(token)
     },
-    setRoles(state, roles) {
+    setRoles (state, roles) {
       setRoles(roles)
     },
-    setUser(state, user) {
+    setUser (state, user) {
       setUser(user)
     },
-    setUserProfile(state, user) {
+    setUserProfile (state, user) {
       state.userProfile = user
     },
-    removeToken() {
+    removeToken () {
       removeToken()
     },
 
-    removeRoles() {
+    removeRoles () {
       removeRoles()
     },
-    setPosts(state, posts) {
+    setPosts (state, posts) {
       state.posts = posts
     }
   },
@@ -72,10 +72,10 @@ const store = new Vuex.Store({
       return new Promise((resolve, reject) => {
         login(loginForm)
           .then(response => {
-            commit("setToken", response.data.access_token)
-            commit("setRoles", response.data.roles[0].role_name)
-            commit("setUserProfile", response.data.user)
-            commit("setUser", response.data.user)
+            commit('setToken', response.data.access_token)
+            commit('setRoles', response.data.roles[0].role_name)
+            commit('setUserProfile', response.data.user)
+            commit('setUser', response.data.user)
             resolve()
           })
           .catch(error => {
@@ -84,21 +84,21 @@ const store = new Vuex.Store({
       })
     },
     LOGOUT: ({ commit }) => {
-      commit("removeToken")
-      commit("removeRoles")
+      commit('removeToken')
+      commit('removeRoles')
     },
     GET_POSTS: ({ commit }, id) => {
       getInfoUser(id).then(
         response => {
           console.log(response)
-         commit("setPosts", response.data)
+          commit('setPosts', response.data)
         },
-        error => {
-          console.log("error")
+        () => {
+          console.log('error')
         }
       )
     }
   }
 })
 
-export default store;
+export default store
