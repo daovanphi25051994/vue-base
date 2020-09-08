@@ -83,9 +83,6 @@ export default {
           this.$router.push(`/admin/${username}`)
         }
       })  
-    },
-    logout () {
-      this.$store.dispatch('LOGOUT')
     }
   },
   computed: {

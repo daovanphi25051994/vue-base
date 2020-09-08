@@ -5,7 +5,8 @@ import {
   setRoles,
   removeToken,
   removeRoles,
-  setUser
+  setUser,
+  removeUser
 } from '../../request/cookie'
 
 const state = {
@@ -47,6 +48,9 @@ const mutations = {
 
   removeRoles() {
     removeRoles();
+  },
+  removeUser(){
+    removeUser()
   }
 };
 
@@ -69,8 +73,15 @@ const actions = {
     });
   },
   LOGOUT: ({ commit }) => {
-    commit("removeToken");
-    commit("removeRoles");
+    return new Promise((resolve, reject) => {
+      commit("removeToken");
+      commit("removeRoles");
+      commit("removeUser");
+      resolve()
+    }).catch(err =>{
+      reject(err)
+    })
+  
   }
 };
 

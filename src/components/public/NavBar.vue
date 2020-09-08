@@ -26,6 +26,8 @@
     <el-menu-item index="4"
       ><a href="https://www.ele.me" target="_blank">Orders</a></el-menu-item
     >
+        <el-menu-item @click="logout">Logout</el-menu-item>
+
   </el-menu>
 </div>
  
@@ -39,7 +41,17 @@ export default {
         return {
 
         }
+    },
+    methods: {
+     logout () {
+      this.$store.dispatch('LOGOUT').then((result) => {
+        this.$router.push("/")
+      }).catch((err) => {
+        
+      });
     }
+    }
+    
 
 };
 </script>
