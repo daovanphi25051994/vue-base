@@ -1,4 +1,5 @@
 <template>
+
   <div id="profile-user">
     <el-row :gutter="20">
       <el-col :span="12" :offset="6"
@@ -11,6 +12,7 @@
               <p>Last Name:{{ user.last_name }}</p>
             </el-col>
             <el-col :span="12">
+              
               <el-card
                 :body-style="{ padding: '0px' }"
                 v-for="post in posts"

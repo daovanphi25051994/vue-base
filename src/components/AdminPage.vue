@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-container style="height: 500px; border: 1px solid #eee">
+    <el-container style=" border: 1px solid #eee">
       <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
         <el-menu :default-openeds="['1', '3']">
           <el-submenu index="1">
@@ -71,12 +71,25 @@
         </el-header>
 
         <el-main>
-          <el-table :data="user">
-            <el-table-column prop="date" label="Date" width="140">
+          <el-table :data="users">
+            <el-table-column prop="id" label="ID">
             </el-table-column>
-            <el-table-column prop="name" label="Name" width="120">
+            <el-table-column prop="username" label="User Name">
+      
+
             </el-table-column>
+            <el-table-column prop="gender" label="Gender"> </el-table-column>
+            <el-table-column prop="email" label="Email"> </el-table-column>
+            <el-table-column prop="phone" label="Phone"> </el-table-column>
             <el-table-column prop="address" label="Address"> </el-table-column>
+            <el-table-column prop="status" label="Status"> </el-table-column>
+            <el-table-column  label="Details"> 
+              <el-button type="primary"  >Details</el-button>
+            </el-table-column>
+              <el-table-column label="Action"> 
+              <el-button type="danger" icon="el-icon-lock" circle></el-button>
+            </el-table-column>
+
           </el-table>
         </el-main>
       </el-container>
@@ -89,15 +102,18 @@ export default {
   name: "admin",
   data() {
     return {
-      user: []
+      users: []
     };
   },
-  mounted(){
-    this.$store.dispatch("GET_USERS").then((users)=>{
-      this.user = users
-    }).catch((err)=>{
-      console.log(err)
-    })
+  mounted() {
+    this.$store
+      .dispatch("GET_USERS")
+      .then(users => {
+        this.users = users;
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 };
 </script>
