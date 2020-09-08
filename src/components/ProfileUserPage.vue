@@ -7,9 +7,18 @@
         <p>First Name:{{ userInfo.first_name }}</p>
         <p>Last Name:{{ userInfo.last_name }}</p>
       </el-col>
-      <el-col :span="16"
-        >Bài viết
-        <button @click="logout">Logout</button>
+      <el-col :span="8">
+          <el-card
+            :body-style="{ padding: '0px' }"
+            v-for="post in posts"
+            :key="post.id"
+          >
+          <h3>{{post.content}}</h3>
+            <img :src="post.image" class="image" />
+          </el-card>
+      </el-col>
+       <el-col :span="8">
+       <h2>Side bar</h2>
       </el-col>
     </el-row>
   </div>
@@ -20,18 +29,24 @@ export default {
   name: "profile-user",
   data() {
     return {
-      userInfo: this.$store.getters.getUser
+      userInfo: this.$store.getters.getUser,
+      posts: this.$store.state.posts
     };
   },
   methods: {
     logout() {
-      this.$store.dispatch("LOGOUT").then(() => {});
+      this.$store.dispatch("LOGOUT");
     }
   },
-  mounted(){
+  mounted() {
     this.$store.dispatch("GET_POSTS", this.$store.state.userProfile.id);
   }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+  .image{
+    width: 100%;
+    height: 500px;
+  }
+</style>
