@@ -8,3 +8,11 @@ export function getInfoUser (id) {
     data
   })
 }
+
+export function getUserByUsername (username) {
+  return httpRequest({
+    url: `api/users/${username}`,
+    method: 'get',
+    data
+  })
+}
