@@ -71,7 +71,7 @@
         </el-header>
 
         <el-main>
-          <el-table :data="tableData">
+          <el-table :data="user">
             <el-table-column prop="date" label="Date" width="140">
             </el-table-column>
             <el-table-column prop="name" label="Name" width="120">
@@ -89,8 +89,15 @@ export default {
   name: "admin",
   data() {
     return {
-      tableData: Array(20).fill(item)
+      user: []
     };
+  },
+  mounted(){
+    this.$store.dispatch("GET_USERS").then((users)=>{
+      this.user = users
+    }).catch((err)=>{
+      console.log(err)
+    })
   }
 };
 </script>
