@@ -29,7 +29,7 @@ const actions = {
       getInfoUser(id)
         .then(
           response => {
-            console.log(response);
+            console.log(response.data);
             commit("setPosts", response.data);
             resolve(response.data);
           },

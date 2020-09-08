@@ -1,37 +1,40 @@
 <template>
   <div id="profile-user">
-    <el-row>
-      <el-col :span="8">
-        <h1>User Profile</h1>
-        <p>Id: {{ userInfo.id }}</p>
-        <p>First Name:{{ userInfo.first_name }}</p>
-        <p>Last Name:{{ userInfo.last_name }}</p>
-      </el-col>
-      <el-col :span="8">
-        <el-card
-          :body-style="{ padding: '0px' }"
-          v-for="post in posts"
-          :key="post.id"
-        >
-          <h3>{{ post.content }}</h3>
-          <p>{{ post.createDate }}</p>
-          <img :src="post.image" class="image" />
-          <p>Likes : {{ post.likeQuantity }}</p>
-        </el-card>
-      </el-col>
-      <el-col :span="8">
-        <h2>Side bar</h2>
-      </el-col>
+    <el-row :gutter="20">
+      <el-col :span="12" :offset="6"
+        ><div class="grid-content bg-purple">
+            <NavBar></NavBar>
+            <el-col :span="12">
+              <h1>User Profile</h1>
+              <p>Id: {{ user.id }}</p>
+              <p>First Name:{{ user.first_name }}</p>
+              <p>Last Name:{{ user.last_name }}</p>
+            </el-col>
+            <el-col :span="12">
+              <el-card
+                :body-style="{ padding: '0px' }"
+                v-for="post in posts"
+                :key="post.id"
+              >
+                <h3>{{ post.content }}</h3>
+                <p>{{ post.createDate }}</p>
+                <img :src="post.image" class="image" />
+                <p>Likes : {{ post.likeQuantity }}</p>
+              </el-card>
+            </el-col>
+        </div></el-col
+      >
     </el-row>
   </div>
 </template>
 
 <script>
+import NavBar from "./public/NavBar";
 export default {
   name: "profile-user",
   data() {
     return {
-      userInfo: this.$store.getters.getUser,
+      user: null,
       posts: this.$store.state.posts.posts
     };
   },
@@ -41,26 +44,34 @@ export default {
     }
   },
   mounted() {
-    console.log("get posts");
-    // eslint-disable-next-line no-unused-vars
-    let userName = this.$route.params.username
+    let username = this.$route.params.username;
     this.$store
-      .dispatch("GET_USER_ID", userName)
+      .dispatch("GET_USER_ID", username)
       .then(id => {
-        console.log(id)
         this.$store
-          .dispatch("GET_POSTS", id )
-          .then(result => {
-            console.log(result);
-            this.posts = result;
+          .dispatch("GET_POSTS", id)
+          .then(posts => {
+            this.posts = posts;
           })
           .catch(err => {
-            console.log(err);
+            console.log("Can not get Posts");
           });
       })
       .catch(err => {
-        console.log(err);
+        console.log("Can not get User");
       });
+
+    this.$store
+      .dispatch("GET_USER_BY_USERNAME", username)
+      .then(user => {
+        this.user = user;
+      })
+      .catch(err => {
+        console.log("Can not get user");
+      });
+  },
+  components: {
+    NavBar
   }
 };
 </script>
@@ -70,4 +81,31 @@ export default {
   width: 100%;
   height: 500px;
 }
+
+.el-row {
+    margin-bottom: 20px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .el-col {
+    border-radius: 4px;
+  }
+  .bg-purple-dark {
+    background: #99a9bf;
+  }
+  .bg-purple {
+    background: #d3dce6;
+  }
+  .bg-purple-light {
+    background: #e5e9f2;
+  }
+  .grid-content {
+    border-radius: 4px;
+    min-height: 36px;
+  }
+  .row-bg {
+    padding: 10px 0;
+    background-color: #f9fafc;
+  }
 </style>

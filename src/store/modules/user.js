@@ -5,7 +5,7 @@ const state = {
 };
 
 const getters = {
-  getuserID(state) {
+  getUserID(state) {
     return state.userID;
   }
 };
@@ -33,6 +33,18 @@ const actions = {
           reject(error);
         });
     });
+  },
+  GET_USER_BY_USERNAME: ({commit}, username) => {
+        return new Promise((resolve, reject) => {
+            getUserByUsername(username).then(response => {
+                console.log(response.data)
+                resolve(response.data)
+            }, error => {
+                console.log("error")
+            }).catch(err => {
+                reject(err)
+            })
+        });
   }
 };
 

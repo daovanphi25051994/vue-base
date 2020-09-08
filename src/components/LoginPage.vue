@@ -73,9 +73,16 @@ export default {
   },
   methods: {
     login () {
-      this.$store.dispatch('LOGIN', this.loginForm).then(() => {
-        this.$router.push(this.$store.getters.getUser.username)
-      })
+      this.$store.dispatch('LOGIN', this.loginForm).then((data) => {
+     let username = data[0]
+     let role = data[1]
+
+        if(role == 'USER'){
+        this.$router.push(username)
+        }else {
+          this.$router.push(`/admin/${username}`)
+        }
+      })  
     },
     logout () {
       this.$store.dispatch('LOGOUT')

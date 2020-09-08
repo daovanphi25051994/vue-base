@@ -16,3 +16,11 @@ export function getUserByUsername (username) {
     data
   })
 }
+
+export function getUserByID (id) {
+  return httpRequest({
+    url: `api/users/${id}`,
+    method: 'get',
+    data
+  })
+}
