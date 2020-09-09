@@ -1,4 +1,4 @@
-import { login } from '../../api/auth'
+import { login, register } from '../../api/auth'
 
 import {
   setToken,
@@ -80,7 +80,16 @@ const actions = {
     }).catch(err =>{
       reject(err)
     })
-  
+  },
+  REGISTER: ({commit}, registerForm)=>{
+    return new Promise((resolve, reject) => {
+      register(registerForm).then(data =>{
+        console.log(data.data)
+        resolve(data.data)
+      }).catch(err => {
+        reject(err)
+      })
+    })
   }
 };
 
