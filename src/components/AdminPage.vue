@@ -105,27 +105,38 @@ export default {
   name: "admin",
   data() {
     return {
-      users: []
+      users: [],
+      icons: ""
     };
   },
   methods: {
     lockUser(row) {
-      if(row.status === 1 ){
-        row.status = 0
-      }else{
-        row.status = 1
+      let message = "";
+      if (row.status === 1) {
+        message = "Bạn có muốn khóa tài khoản này?";
+      } else {
+        message = "Bạn có muốn mở tài khoản này?";
       }
-      this.$store.dispatch("LOCK_USER", row).then((user) =>{
-        console.log(user)
-      }).catch((err)=>{
-
-      })
+      let isAgree = confirm(message);
+      if (isAgree) {
+        if (row.status === 1) {
+          row.status = 0;
+        } else {
+          row.status = 1;
+        }
+        this.$store
+          .dispatch("LOCK_USER", row)
+          .then(user => {
+          })
+          .catch(err => {});
+      }
     }
   },
   mounted() {
     this.$store
       .dispatch("GET_USERS")
       .then(users => {
+        this.users = users;
         // const result = users.filter(user => {
         //   if (user.gender === 1) {
         //     return (user.gender = "Nam");
@@ -140,7 +151,6 @@ export default {
         //     return (user.status = "Khóa");
         //   }
         // });
-        this.users = users;
       })
       .catch(err => {
         console.log(err);
