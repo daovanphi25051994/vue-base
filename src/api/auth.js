@@ -7,3 +7,11 @@ export function login(data) {
     data: data
   });
 }
+
+export function register(data) {
+  return httpRequest({
+    url: "auth/register",
+    method: "post",
+    data: data
+  });
+}
