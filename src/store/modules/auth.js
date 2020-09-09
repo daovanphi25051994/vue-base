@@ -19,7 +19,8 @@ const state = {
     email: "",
     birth_date: "",
     phone: "",
-    about_me: ""
+    about_me: "",
+    status: null
   }
 };
 

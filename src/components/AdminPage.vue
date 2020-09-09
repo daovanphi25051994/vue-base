@@ -72,24 +72,28 @@
 
         <el-main>
           <el-table :data="users">
-            <el-table-column prop="id" label="ID">
-            </el-table-column>
+            <el-table-column prop="id" label="ID"> </el-table-column>
             <el-table-column prop="username" label="User Name">
-      
-
             </el-table-column>
             <el-table-column prop="gender" label="Gender"> </el-table-column>
             <el-table-column prop="email" label="Email"> </el-table-column>
             <el-table-column prop="phone" label="Phone"> </el-table-column>
             <el-table-column prop="address" label="Address"> </el-table-column>
             <el-table-column prop="status" label="Status"> </el-table-column>
-            <el-table-column  label="Details"> 
-              <el-button type="primary"  >Details</el-button>
+            <el-table-column label="Details">
+              <el-button type="primary">Details</el-button>
             </el-table-column>
-              <el-table-column label="Action"> 
-              <el-button type="danger" icon="el-icon-lock" circle></el-button>
+            <el-table-column label="Action">
+              <template slot-scope="scope">
+               <el-button
+                type="danger"
+                icon="el-icon-lock"
+                circle
+                @click="lockUser(scope.row.id)"
+              ></el-button>
+              </template>
+              
             </el-table-column>
-
           </el-table>
         </el-main>
       </el-container>
@@ -105,11 +109,30 @@ export default {
       users: []
     };
   },
+  methods: {
+    lockUser(id) {
+      console.log(id);
+    }
+  },
   mounted() {
     this.$store
       .dispatch("GET_USERS")
       .then(users => {
-        this.users = users;
+        const result = users.filter(user => {
+          if (user.gender === 1) {
+            return (user.gender = "Nam");
+          } else {
+            return (user.gender = "Nữ");
+          }
+        });
+        const finalResult = result.filter(user => {
+          if (user.status === 1) {
+            return (user.status = "Hoạt động");
+          } else {
+            return (user.status = "Khóa");
+          }
+        });
+        this.users = finalResult;
       })
       .catch(err => {
         console.log(err);
