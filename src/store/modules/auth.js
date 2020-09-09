@@ -63,8 +63,6 @@ const actions = {
           commit("setRoles", response.data.roles[0].role_name);
           commit("setUserProfile", response.data.user);
           commit("setUser", response.data.user);
-          console.log(response.data.user.username)
-          console.log( response.data.roles[0].role_name)
           resolve([response.data.user.username, response.data.roles[0].role_name]);
         })
         .catch(error => {

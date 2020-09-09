@@ -37,7 +37,7 @@ export default {
   data() {
     return {
       user: null,
-      posts: this.$store.state.posts.posts
+      posts: null
     };
   },
   methods: {

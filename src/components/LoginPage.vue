@@ -44,52 +44,52 @@
 
 <script>
 export default {
-  name: 'login',
-  data () {
+  name: "login",
+  data() {
     var checkEmail = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('Please input the email'))
+      if (value === "") {
+        callback(new Error("Please input the email"));
       }
-    }
+    };
     var validatePass = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('Please input the password'))
+      if (value === "") {
+        callback(new Error("Please input the password"));
       }
-      callback()
-    }
+      callback();
+    };
 
     return {
       loginForm: {
-        email: '',
-        password: ''
+        email: "",
+        password: ""
       },
       rules: {
-        password: [{ validator: validatePass, trigger: 'blur' }],
-        email: [{ validator: checkEmail, trigger: 'blur' }]
+        password: [{ validator: validatePass, trigger: "blur" }],
+        email: [{ validator: checkEmail, trigger: "blur" }]
       },
       src:
-        'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg'
-    }
+        "https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg"
+    };
   },
   methods: {
-    login () {
-      this.$store.dispatch('LOGIN', this.loginForm).then((data) => {
-     let username = data[0]
-     let role = data[1]
-        if(role == 'USER'){
-        this.$router.push(username)
-        }else {
-          this.$router.push(`/admin/${username}`)
+    login() {
+      this.$store.dispatch("LOGIN", this.loginForm).then(data => {
+        let username = data[0];
+        let role = data[1];
+        if (role == "USER") {
+          this.$router.push(username);
+        } else {
+          this.$router.push(`/admin/${username}`);
         }
-      })  
+      });
     }
   },
   computed: {
-    getUser () {
-      return this.$store.getters.getUser
+    getUser() {
+      return this.$store.getters.getUser;
     }
   }
-}
+};
 </script>
 
 <style scoped></style>

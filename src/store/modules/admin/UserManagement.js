@@ -22,7 +22,6 @@ const actions = {
         getUsers()
         .then(
           response => {
-              console.log(response.data)
            commit("setUsers", response.data)
             resolve(response.data);
           },
