@@ -54,16 +54,12 @@
       </el-col>
     </el-row>
 
-
-
-
-
     <el-dialog
       id="register-form"
       title="Đăng ký"
       :visible.sync="dialogFormVisible"
     >
-    <p class="message">{{ messgage }}</p>
+      <p class="message">{{ messgage }}</p>
       <el-form
         :model="registerForm"
         :rules="rules"
@@ -71,37 +67,49 @@
         class="demo-ruleForm"
       >
         <el-form-item>
-          <el-input placeholder="Họ" v-model="registerForm.first_name"></el-input>
+          <el-input
+            placeholder="Họ"
+            v-model="registerForm.first_name"
+          ></el-input>
         </el-form-item>
         <el-form-item>
-          <el-input placeholder="Tên" v-model="registerForm.last_name"></el-input>
+          <el-input
+            placeholder="Tên"
+            v-model="registerForm.last_name"
+          ></el-input>
         </el-form-item>
         <el-form-item>
           <el-input placeholder="Email" v-model="registerForm.email"></el-input>
         </el-form-item>
-        
+
         <el-form-item>
-          <el-input type="password" placeholder="Mật khẩu" v-model="registerForm.password"></el-input>
+          <el-input
+            type="password"
+            placeholder="Mật khẩu"
+            v-model="registerForm.password"
+          ></el-input>
         </el-form-item>
-        
+
         <el-form-item>
-          <el-input type="password" placeholder="Xác nhận mật khẩu" v-model="registerForm.confirm_password"></el-input>
+          <el-input
+            type="password"
+            placeholder="Xác nhận mật khẩu"
+            v-model="registerForm.confirm_password"
+          ></el-input>
         </el-form-item>
-        
-         <el-date-picker type="date" placeholder="Ngày sinh"  style="width: 100%;" v-model="registerForm.birth_date"></el-date-picker>
+
+        <el-date-picker
+          type="date"
+          placeholder="Ngày sinh"
+          style="width: 100%;"
+          v-model="registerForm.birth_date"
+        ></el-date-picker>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="register"
-          >Đăng ký</el-button
-        >
+        <el-button type="primary" @click="register">Đăng ký</el-button>
       </span>
     </el-dialog>
-
-
-
-
-
   </div>
 </template>
 
@@ -146,8 +154,7 @@ export default {
         status: 1,
         birth_date: ""
       },
-      formLabelWidth: "120px",
-      messgage: ''
+      formLabelWidth: "120px", messgage: ''
     };
   },
   methods: {
@@ -162,13 +169,17 @@ export default {
         }
       });
     },
-    register(){
-      console.log(this.registerForm)
-      this.$store.dispatch("REGISTER", this.registerForm).then(data =>{
-        this.messgage = 'Đăng ký thành công!! Chào mừng '+ data.last_name + ' đến với facebook.'
-      }, err =>{
-        this.messgage = 'Đăng ký thất bại!'
-      })
+    register() {
+      console.log(this.registerForm);
+      this.$store
+        .dispatch("REGISTER", this.registerForm)
+        .then(data => {
+          this.messgage =
+            "Đăng ký thành công!! Chào mừng bạn đến với facebook.";
+        })
+        .catch(err => {
+          this.messgage = "Đăng ký thất bại!";
+        });
     }
   },
   computed: {
@@ -203,7 +214,7 @@ export default {
   margin: 0 auto;
   width: 60%;
 }
-.message{
+.message {
   color: green;
 }
 </style>
