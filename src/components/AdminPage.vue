@@ -150,7 +150,7 @@ export default {
       const newArray = [];
       const rootUser = this.$store.state.UserManagements.users;
       rootUser.forEach(user => {
-        if (user.username === this.searchKey) {
+        if (user.username.startsWith(this.searchKey)) {
           newArray.push(user);
         }
       });
