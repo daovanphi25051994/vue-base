@@ -1,4 +1,4 @@
-import { getUsers } from '../../../api/admin/UserManagement';
+import { getUsers, lockUser } from '../../../api/admin/UserManagement';
 
 const state = {
     users: []
@@ -34,6 +34,15 @@ const actions = {
         });
     });
   },
+  LOCK_USER: ({commit}, user) =>{
+    return new Promise((resolve, reject) =>{
+      lockUser(user).then((result) =>{
+        resolve(result)
+      }).catch(error =>{
+        reject(error)
+      })
+    })
+  }
  
 };
 

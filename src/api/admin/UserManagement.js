@@ -8,3 +8,11 @@ export function getUsers () {
     data
   })
 }
+
+export function lockUser (user) {
+  return httpRequest({
+    url: 'api/admin/users/status',
+    method: 'put',
+    data: user
+  })
+}

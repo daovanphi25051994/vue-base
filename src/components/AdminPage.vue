@@ -85,14 +85,13 @@
             </el-table-column>
             <el-table-column label="Action">
               <template slot-scope="scope">
-               <el-button
-                type="danger"
-                icon="el-icon-lock"
-                circle
-                @click="lockUser(scope.row.id)"
-              ></el-button>
+                <el-button
+                  type="danger"
+                  icon="el-icon-lock"
+                  circle
+                  @click="lockUser(scope.row)"
+                ></el-button>
               </template>
-              
             </el-table-column>
           </el-table>
         </el-main>
@@ -110,29 +109,38 @@ export default {
     };
   },
   methods: {
-    lockUser(id) {
-      console.log(id);
+    lockUser(row) {
+      if(row.status === 1 ){
+        row.status = 0
+      }else{
+        row.status = 1
+      }
+      this.$store.dispatch("LOCK_USER", row).then((user) =>{
+        console.log(user)
+      }).catch((err)=>{
+
+      })
     }
   },
   mounted() {
     this.$store
       .dispatch("GET_USERS")
       .then(users => {
-        const result = users.filter(user => {
-          if (user.gender === 1) {
-            return (user.gender = "Nam");
-          } else {
-            return (user.gender = "Nữ");
-          }
-        });
-        const finalResult = result.filter(user => {
-          if (user.status === 1) {
-            return (user.status = "Hoạt động");
-          } else {
-            return (user.status = "Khóa");
-          }
-        });
-        this.users = finalResult;
+        // const result = users.filter(user => {
+        //   if (user.gender === 1) {
+        //     return (user.gender = "Nam");
+        //   } else {
+        //     return (user.gender = "Nữ");
+        //   }
+        // });
+        // const finalResult = result.filter(user => {
+        //   if (user.status === 1) {
+        //     return (user.status = "Hoạt động");
+        //   } else {
+        //     return (user.status = "Khóa");
+        //   }
+        // });
+        this.users = users;
       })
       .catch(err => {
         console.log(err);
