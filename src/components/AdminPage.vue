@@ -64,10 +64,10 @@
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>View</el-dropdown-item>
               <el-dropdown-item>Add</el-dropdown-item>
-              <el-dropdown-item>Delete</el-dropdown-item>
+              <el-dropdown-item><el-link @click="logout">Logout</el-link></el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
-          <span>Tom</span>
+          <span>{{ username }}</span>
         </el-header>
 
         <el-main>
@@ -106,7 +106,8 @@ export default {
   data() {
     return {
       users: [],
-      icons: ""
+      icons: "",
+      username: this.$route.params.username
     };
   },
   methods: {
@@ -130,7 +131,14 @@ export default {
           })
           .catch(err => {});
       }
-    }
+    },
+      logout () {
+      this.$store.dispatch('LOGOUT').then((result) => {
+        this.$router.push("/")
+      }).catch((err) => {
+        
+      });
+      }
   },
   mounted() {
     this.$store
